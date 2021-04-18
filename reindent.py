@@ -66,12 +66,13 @@ def errprint(*args):
     sys.stderr.write(" ".join(str(arg) for arg in args))
     sys.stderr.write("\n")
 
+
 def main():
     import getopt
     global verbose, recurse, dryrun, makebackup, spec_newline
     try:
         opts, args = getopt.getopt(sys.argv[1:], "drnvh",
-            ["dryrun", "recurse", "nobackup", "verbose", "newline=", "help"])
+                                   ["dryrun", "recurse", "nobackup", "verbose", "newline=", "help"])
     except getopt.error as msg:
         usage(msg)
         return
@@ -111,7 +112,7 @@ def check(file):
             if ((recurse and os.path.isdir(fullname) and
                  not os.path.islink(fullname) and
                  not os.path.split(fullname)[1].startswith("."))
-                or name.lower().endswith(".py")):
+                    or name.lower().endswith(".py")):
                 check(fullname)
         return
 
@@ -132,7 +133,8 @@ def check(file):
 
     newline = spec_newline if spec_newline else r.newlines
     if isinstance(newline, tuple):
-        errprint("%s: mixed newlines detected; cannot continue without --newline" % file)
+        errprint(
+            "%s: mixed newlines detected; cannot continue without --newline" % file)
         return
 
     if r.run():
@@ -238,7 +240,7 @@ class Reindenter:
                                     want = jlevel * 4
                                 break
                     if want < 0:           # Maybe it's a hanging
-                                           # comment like this one,
+                        # comment like this one,
                         # in which case we should shift it like its base
                         # line got shifted.
                         for j in range(i - 1, -1, -1):

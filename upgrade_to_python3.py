@@ -8,7 +8,7 @@ from typing import Iterable, Tuple, Union
 
 from generate_commit_msg import generate_commit_msg
 
-print('=' * 83)  # Mark the start of Python execution in the Action logfile
+print('=' * 83)  #  Mark the start of Python execution in the Action logfile
 
 NEW_BRANCH_NAME = 'modernize-Python-2-codes'
 
@@ -20,7 +20,8 @@ SAFE_FIXES = set('lib2to3.fixes.fix_' + fix for fix
                        sys_exc throw tuple_params types xreadlines""".split())
 
 
-def cmd(in_cmd: Union[str, Iterable[str]], check: bool = True, err_text: bool = False) -> str:  # run command and return its output
+# run command and return its output
+def cmd(in_cmd: Union[str, Iterable[str]], check: bool = True, err_text: bool = False) -> str:
     """Run a command and return its output or raise CalledProcessError"""
     print('$', in_cmd)
     if isinstance(in_cmd, str):
@@ -90,4 +91,5 @@ push_result = ''
 if '+' not in diff:
     print('diff is empty!')
 print('Success!')
-print('\n'.join(line.replace('remote:', '') for line in push_result.splitlines()[1:4]))
+print('\n'.join(line.replace('remote:', '')
+      for line in push_result.splitlines()[1:4]))
